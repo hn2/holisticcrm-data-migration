@@ -1,0 +1,83 @@
+DROP TABLE IF EXISTS z_target.Tasks;
+
+CREATE TABLE z_target.Tasks AS
+SELECT CreatedByName, 
+		cs1_teacherName, 
+		TransactionCurrencyIdName, 
+		ModifiedByYomiName, 
+		ModifiedOnBehalfByName, 
+		ModifiedByName, 
+		ModifiedOnBehalfByYomiName, 
+		CreatedOnBehalfByYomiName, 
+		cs1_client_numberYomiName, 
+		CreatedOnBehalfByName, 
+		CreatedByYomiName, 
+		cs1_client_numberName, 
+		OwnerId, 
+		OwnerIdName, 
+		OwnerIdYomiName, 
+		OwnerIdDsc, 
+		OwnerIdType, 
+		OwningUser, 
+		OwningTeam, Subject, 
+		ActualEnd, 
+		ScheduledStart, 
+		RegardingObjectId, 
+		ScheduledDurationMinutes, 
+		ActualStart, StateCode, 
+		ActivityId, Category, 
+		CreatedOn, 
+		OwningBusinessUnit, 
+		IsWorkflowCreated, 
+		CreatedBy, 
+		ModifiedBy, 
+		Subcategory, 
+		ScheduledEnd, 
+		Description, 
+		PercentComplete, 
+		SubscriptionId, 
+		PriorityCode, 
+		VersionNumber, 
+		ServiceId, 
+		ActualDurationMinutes, 
+		ModifiedOn, 
+		case
+			when StatusCode = 2 then
+			when StatusCode = 3 then
+			when StatusCode = 4 then
+			when StatusCode - 7 then
+			else null
+		end as StatusCode
+		IsBilled, 
+		RegardingObjectIdName, 
+		RegardingObjectTypeCode, 
+		ImportSequenceNumber, 
+		TimeZoneRuleVersionNumber, 
+		UTCConversionTimeZoneCode, 
+		OverriddenCreatedOn, 
+		RegardingObjectIdYomiName, 
+		CreatedOnBehalfBy, 
+		ModifiedOnBehalfBy, 
+		ActivityTypeCode, 
+		IsRegularActivity, 
+		TransactionCurrencyId, 
+		ExchangeRate, 
+		cs1_changedbyconv, 
+		cs1_changeddateconv, 
+		cs1_convid, 
+		cs1_createdbyconv, 
+		cs1_createddateconv, 
+		cs1_convowner, 
+		cs1_convstatecode, 
+		cs1_convstatus, 
+		cs1_client_number, 
+		cs1_Registered, 
+		cs1_callback, 
+		cs1_statushamtana, 
+		cs1_friend, 
+		cs1_teacher, 
+		cs1_mateim_lekors
+FROM z_source.task;
+
+select * FROM z_target.Tasks;
+
