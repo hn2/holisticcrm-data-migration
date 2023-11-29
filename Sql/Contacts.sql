@@ -1,7 +1,5 @@
 DROP TABLE IF EXISTS z_target.Contacts;
 
-CREATE TABLE z_target.Contacts AS
-
 -- SELECT TransactionCurrencyIdName, CreatedByYomiName, cs1_siteName, cs1_cityName, OriginatingLeadIdYomiName, ModifiedByName, ModifiedOnBehalfByName, ModifiedOnBehalfByYomiName, OriginatingLeadIdName, CreatedByName, ModifiedByYomiName, 
 -- Address1_AddressId, Address1_Line1, Address1_PostalCode, Address2_AddressTypeCode, Address2_AddressId, Address2_FreightTermsCode, Address2_ShippingMethodCode, OwnerId, OwnerIdName, OwnerIdYomiName, OwnerIdDsc, OwnerIdType, OwningUser, 
 -- ContactId, CustomerSizeCode, CustomerTypeCode, PreferredContactMethodCode, LeadSourceCode, OriginatingLeadId, OwningBusinessUnit, ShippingMethodCode, ParticipatesInWorkflow, IsBackofficeCustomer, FirstName, LastName, FullName, YomiFullName, 
@@ -21,46 +19,49 @@ CREATE TABLE z_target.Contacts AS
 -- cs1_card_num_for_malon, cs1_did_return_card_malom
 -- FROM z_source.contact;
 
-select  FirstName as 'FirstName',	-- String	
-		LastName as	'LastName',	-- String	
-		EMailAddress1 as 'Email',	-- String	
-		cs1_internal_number as 'ContactNumber',		
-		cs1_name_comments as 'Title',
-		cs1_id as 'identityNumber',	
-		cs1_site as	'Branch',	-- Lookup	Branches
+CREATE TABLE z_target.Contacts AS
+select  c.FirstName as 'FirstName',	-- String	
+		c.LastName as	'LastName',	-- String	
+		c.EMailAddress1 as 'Email',	-- String	
+		c.cs1_internal_number as 'ContactNumber',		
+		c.cs1_name_comments as 'Title',
+		c.cs1_id as 'identityNumber',	
+		c.cs1_site as	'Branch',	-- Lookup	Branches
 		-- Value as 'Gender',		
 		-- GenderCode as 'Gender',
 		case 
-			when GenderCode = 1 then 'זכר'
-			when GenderCode = 2 then 'נקבה'	
+			when c.GenderCode = 1 then 'זכר'
+			when c.GenderCode = 2 then 'נקבה'	
 			else 'אחר'
 		end as 'Gender',
-				cs1_telephone1 as 'Phone',		
-				cs1_mobile_phone	as 'Mobile',	
+		c.cs1_telephone1 as 'Phone',		
+		c.cs1_mobile_phone	as 'Mobile',	
 -- 		cast(cs1_prefix1  as nchar) + cast(Telephone1  as nchar) as 'Phone',		
 -- 		cast(cs1_prefix_mobile as nchar) + cast(MobilePhone as nchar)	as 'Mobile',			
-		cs1_mobile as 'Other Mobile',		
-		cs1_birthday as 'Date of Birth',		
-		Address1_Line1 as 'Street',		
-		cs1_city as 'City',	-- Lookup	Cities
-		Address1_PostalCode	as 'ZipCode',	-- String	
-		cs1_target_unit_tanach	as 'TanachUnits',	--	Integer	
-		cs1_tanach as 'tanachGrade',	--	Integer	
-		cs1_target_unit_hebrew	as 'HebrewUnits',	--	Integer	
-		cs1_hebrew_language as 'HebrewGrade',	--	Integer	
-		cs1_english	as 'EnglishUnits',	--	Integer	
+		c.cs1_mobile as 'Other Mobile',		
+-- 		c.cs1_birthday as 'Date of Birth',	
+		cb.birthday as 'Date of Birth',			
+		c.Address1_Line1 as 'Street',		
+		c.cs1_city as 'City',	-- Lookup	Cities
+		c.Address1_PostalCode	as 'ZipCode',	-- String	
+		c.cs1_target_unit_tanach	as 'TanachUnits',	--	Integer	
+		c.cs1_tanach as 'tanachGrade',	--	Integer	
+		c.cs1_target_unit_hebrew	as 'HebrewUnits',	--	Integer	
+		c.cs1_hebrew_language as 'HebrewGrade',	--	Integer	
+		c.cs1_english	as 'EnglishUnits',	--	Integer	
 		-- cs1_target_unit_english as 'EnglishUnits2',	--	Integer	
-		cs1_english_grade as 'EnglishGrade',	--	Integer	
-		cs1_target_unit_mathematics_a as 'MathUnits',	--	Integer	
-		cs1_mathematics_grade as 'MathGrade',	--	Integer	
-		cs1_target_unit_history_a as 'HistoryUnits',	--	Integer	
-		cs1_history_a	as 'HistoryGrade',	--	Integer	
-		cs1_physics	as 'PhysicsUnits',	--	Integer	
-		cs1_physics_grade as 'PhysicsGrade'	--	Integer	
+		c.cs1_english_grade as 'EnglishGrade',	--	Integer	
+		c.cs1_target_unit_mathematics_a as 'MathUnits',	--	Integer	
+		c.cs1_mathematics_grade as 'MathGrade',	--	Integer	
+		c.cs1_target_unit_history_a as 'HistoryUnits',	--	Integer	
+		c.cs1_history_a	as 'HistoryGrade',	--	Integer	
+		c.cs1_physics	as 'PhysicsUnits',	--	Integer	
+		c.cs1_physics_grade as 'PhysicsGrade'	--	Integer	
 		-- cs1_academic_institution_firstdegreeName as 'AcademicInsition',	-- String	
 		-- cs1_faculty_firstdegreeName	as 'WantToLearn',	--	String	
 		-- Value as 'WhenWantToLearn'	--	Number	
-FROM z_source.contact;
-
+FROM z_source.contact c
+inner join z_source.contact_birthday cb
+on c.ContactId = cb.contactid;
 
 select * from z_target.Contacts;
