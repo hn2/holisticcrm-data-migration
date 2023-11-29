@@ -42,12 +42,12 @@ SELECT CreatedByName,
 		ActualDurationMinutes, 
 		ModifiedOn, 
 		case
-			when StatusCode = 2 then
-			when StatusCode = 3 then
-			when StatusCode = 4 then
-			when StatusCode - 7 then
+			when StatusCode = 2 then 'לא החל'
+			when StatusCode = 3 then 'מתבצע'
+			when StatusCode = 4 then 'ממתין למישהו אחר'
+			when StatusCode - 7 then 'נדחה'
 			else null
-		end as StatusCode
+		end as StatusCode,
 		IsBilled, 
 		RegardingObjectIdName, 
 		RegardingObjectTypeCode, 
@@ -58,7 +58,14 @@ SELECT CreatedByName,
 		RegardingObjectIdYomiName, 
 		CreatedOnBehalfBy, 
 		ModifiedOnBehalfBy, 
-		ActivityTypeCode, 
+		case
+			when ActivityTypeCode = '4204' then 'פקס'
+			when ActivityTypeCode = '4210' then 'שיחת טלפון'
+			when ActivityTypeCode = '4202' then 'פגישה'
+			when ActivityTypeCode = '4214' then 'פגישת יעוץ'
+			when ActivityTypeCode = '4212' then 'משימה'
+			when ActivityTypeCode = '10018' then 'שליחת SMS'
+		end ActivityTypeCode,
 		IsRegularActivity, 
 		TransactionCurrencyId, 
 		ExchangeRate, 
@@ -73,7 +80,13 @@ SELECT CreatedByName,
 		cs1_client_number, 
 		cs1_Registered, 
 		cs1_callback, 
-		cs1_statushamtana, 
+		case
+			when cs1_statushamtana = '861650000' then 'חדש'
+			when cs1_statushamtana = '01' then 'בטיפול'
+			when cs1_statushamtana = '02' then 'הועבר לאישור מנהל'
+			when cs1_statushamtana = '03' then 'טופל'
+			else null
+		end as cs1_statushamtana,
 		cs1_friend, 
 		cs1_teacher, 
 		cs1_mateim_lekors
