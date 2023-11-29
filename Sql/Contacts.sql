@@ -61,7 +61,7 @@ select  c.FirstName as 'FirstName',	-- String
 		-- cs1_faculty_firstdegreeName	as 'WantToLearn',	--	String	
 		-- Value as 'WhenWantToLearn'	--	Number	
 FROM z_source.contact c
-inner join z_source.contact_birthday cb
+left join z_source.contact_birthday cb
 on c.ContactId = cb.contactid;
 
 select * from z_target.Contacts;
