@@ -3,6 +3,14 @@ DROP TABLE IF EXISTS z_target.SalesOrders;
 /*SELECT cs1_supplierName, ModifiedOnBehalfByName, OpportunityIdName, QuoteIdName, CampaignIdName, ModifiedOnBehalfByYomiName, ModifiedByName, ModifiedByYomiName, TransactionCurrencyIdName, CreatedByYomiName, CreatedByName, PriceLevelIdName, OwnerId, OwnerIdName, OwnerIdYomiName, OwnerIdDsc, OwnerIdType, OwningUser, ContactId, ContactIdName, ContactIdYomiName, SalesOrderId, OpportunityId, QuoteId, PriorityCode, OwningBusinessUnit, PriceLevelId, OrderNumber, Name, PricingErrorCode, TotalAmount, TotalLineItemAmount, TotalLineItemDiscountAmount, TotalAmountLessFreight, TotalDiscountAmount, TotalTax, CreatedBy, CreatedOn, ModifiedBy, ModifiedOn, StateCode, StatusCode, VersionNumber, WillCall, ShipTo_FreightTermsCode, DiscountPercentage, CustomerId, CustomerIdName, CustomerIdType, CampaignId, IsPriceLocked, TransactionCurrencyId, TimeZoneRuleVersionNumber, ExchangeRate, TotalLineItemAmount_Base, TotalDiscountAmount_Base, TotalAmountLessFreight_Base, TotalAmount_Base, TotalLineItemDiscountAmount_Base, TotalTax_Base, CustomerIdYomiName, ModifiedOnBehalfBy, cs1_confirmdate, cs1_date_debt, cs1_interest_type, cs1_source_opp, cs1_discounttype, cs1_supplier, cs1_coursecounter, cs1_canceled, cs1_studying_agreement, cs1_discount, cs1_new_order, cs1_Signed_at_the_branch, cs1_totalamount_order, cs1_totalamount_order_Base, cs1_sec, cs1_Signed_branch_ARB, cs1_makdim
 FROM z_source.salesorder;*/
 
+-- SELECT ModifiedBy, ModifiedByName, ModifiedOn, Name, new_discount1_approving_managerid, new_discount1_approving_manageridName, new_discount2_approving_managerid, new_discount2_approving_manageridName, new_discount1_reason, 
+-- 	   new_discount1_reasonName, new_discount2_reason, new_discount2_reasonName, new_discount3_approving_manageridName, new_discount3_reason, new_discount3_reasonName, OpportunityId, OpportunityIdName, OrderNumber, OwnerId, 
+-- 	   OwnerIdName, PriceLevelId, PriceLevelIdName, SalesOrderId, StateCode, StateCode_value, StatusCode, StatusCode_value, TotalAmount, TotalAmount_Base, TotalAmountLessFreight, TotalAmountLessFreight_Base, TotalDiscountAmount, 
+-- 	   TotalDiscountAmount_Base, TotalLineItemAmount, TotalLineItemAmount_Base, TotalLineItemDiscountAmount, TotalLineItemDiscountAmount_Base, TotalTax, TotalTax_Base, cs1_interest_type, cs1_interest_type_value, cs1_new_order, 
+-- 	   cs1_new_order_value, cs1_sec, cs1_sec_value, cs1_Signed_at_the_branch, cs1_Signed_at_the_branch_value, cs1_source_opp, cs1_source_opp_value, cs1_studying_agreement, cs1_studying_agreement_value, cs1_supplier, cs1_supplierName, 
+-- 	   CustomerId, CustomerIdName, DateFulfilled, Column57
+-- FROM z_source.salesorder;
+
 create table z_target.SalesOrders
 as SELECT  ModifiedBy as 'ModifiedBy', --	Lookup	Users
 		ModifiedByName as 'ModifiedByName', --	Lookup	
@@ -51,11 +59,11 @@ as SELECT  ModifiedBy as 'ModifiedBy', --	Lookup	Users
 		cs1_supplierName as 'cs1_supplierName',
 		CustomerId	as 'Account_Name', --	Lookup	
 		-- DateFulfilled as 'ClosingDate' --	Date
-		case 
-			when cs1_discounttype = '861650003' then 'רגיל'
-			when cs1_discounttype = '04' then 'חייל'
-			else null
-		end as cs1_discounttype,
+-- 		case 
+-- 			when cs1_discounttype = '861650003' then 'רגיל'
+-- 			when cs1_discounttype = '04' then 'חייל'
+-- 			else null
+-- 		end as cs1_discounttype,
 		case 
 			when cast(cs1_source_opp as char) = '861,650,064' then 'כנס התאמות'
 			when cast(cs1_source_opp as char) = '861,650,062' then 'טלאופיס'	
