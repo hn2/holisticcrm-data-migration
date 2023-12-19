@@ -1,25 +1,21 @@
 DROP TABLE IF EXISTS z_target.Vendors;
 
+-- SELECT CreatedBy, CreatedByName, cs1_name, cs1_supplierId, cs1_supplier_type, ModifiedBy, ModifiedByName, ModifiedOn, statecode, statecode_value, statuscode, statuscode_value
+-- FROM z_source.cs1_supplier;
+
 CREATE TABLE z_target.Vendors AS
-SELECT  CreatedByName, 
-		CreatedByYomiName, 
-		CreatedOnBehalfByName, 
-		CreatedOnBehalfByYomiName, 
-		ModifiedByName, 
-		ModifiedByYomiName, 
-		ModifiedOnBehalfByName, 
-		ModifiedOnBehalfByYomiName, 
-		OrganizationIdName, 
-		cs1_supplierId, CreatedOn, 
-		CreatedBy, 
-		ModifiedOn, 
-		ModifiedBy, 
-		CreatedOnBehalfBy, 
-		ModifiedOnBehalfBy, 
-		OrganizationId, 
-		statecode, statuscode, 
-		VersionNumber, 
+SELECT  CreatedBy, 
+		CreatedByName, 
 		cs1_name, 
-		cs1_content_system, 
-		cs1_supplier_type
+		cs1_supplierId, 
+		cs1_supplier_type, 
+		ModifiedBy, 
+		ModifiedByName, 
+		ModifiedOn, 
+		statecode, 
+		statecode_value, 
+		statuscode, 
+		statuscode_value
 FROM z_source.cs1_supplier;
+
+SELECT * FROM z_target.Vendors;
