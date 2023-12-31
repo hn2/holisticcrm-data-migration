@@ -14,16 +14,16 @@ select  cs1_studentname	as 'Contact_Name', -- Lookup	Contacts
 		-- cast(coalesce(case when cs1_course_price = 'NULL' then null else cs1_course_price end, 0) as decimal) as 'Amount', -- Currency	
 		cast(coalesce(cs1_course_price, 0) as decimal) as 'Amount', -- Currency	
 		-- cs1_course_back_eligibility	?		
-		cast(coalesce(case when cs1_paid = 'NULL' then null else cs1_paid end, 0) as decimal) as 'Paid', -- Currency	
+		case when cs1_paid = 'NULL' then null else cs1_paid end as 'Paid', -- Currency	
 		-- cast(cs1_debtpaid as decimal) as 'Debt', -- Currency	
 		-- cast(cs1_new_end_date as Date)	as 'Custom_EndDate', -- Date	
 		-- cast(cs1_course_registry_date as Date)	as 'Reg_Date', -- Date	
 		cs1_coursea	 as 'Course_Name', --	Lookup	Courses
 		-- cast(cs1_paydate as Date) as 'Pay_Date', --	Date	
-	    case 
-	    	when cs1_learningagreement_Preparatory = 0 then 'False'
- 			when cs1_learningagreement_Preparatory = 1 then 'True'
-	    end as 'StudyAgreement', -- Boolean		
+-- 	    case 
+-- 	    	when cs1_learningagreement_Preparatory = 0 then 'False'
+--  			when cs1_learningagreement_Preparatory = 1 then 'True'
+-- 	    end as 'StudyAgreement', -- Boolean		
 		cast(cs1_knowateacher as nchar) as 'askTeacher', 	
 		-- cast(cs1_missing_lessons_new as unsigned) as 'NumOfMiss', -- integer	
 		cs1_missing_lessons_new as 'NumOfMiss', -- integer	

@@ -1,4 +1,4 @@
-SET group_concat_max_len = 2048;
+SET group_concat_max_len = 4096;
 
 DROP TABLE IF EXISTS z_target.Teachers;
 

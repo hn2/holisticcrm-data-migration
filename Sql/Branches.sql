@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS z_target.Branches;
 
 CREATE TABLE z_target.Branches AS
-SELECT 	cast(siteid as unsigned) as 'id',
+SELECT 	cast(siteid as nchar) as 'id',
 		cast(Name as nchar) as 'Site Name'
 FROM z_source.sites;
 

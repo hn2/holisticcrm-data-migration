@@ -54,11 +54,13 @@ select  c.FirstName as 'FirstName',	-- String
 		c.cs1_site as	'Branch',	-- Lookup	Branches
 		-- Value as 'Gender',		
 		-- GenderCode as 'Gender',
+	/*
 		case 
 			when c.GenderCode = 1 then 'זכר'
 			when c.GenderCode = 2 then 'נקבה'	
 			else 'אחר'
 		end as 'Gender',
+	*/
 		-- c.cs1_telephone1 as 'Phone',		
 		c.Telephone1 as 'Phone',		
 		-- c.cs1_mobile_phone	as 'Mobile',	
